@@ -7,7 +7,7 @@
 int  main( int  argc,  char  *argv[])  
 {  
     int  client_sockfd;  
-    int  len;  
+    int  len,i;  
     struct  sockaddr_in remote_addr;  //服務器端網絡地址結構體  
     int  sin_size;
     char  buf[BUFSIZ];   //數據傳送的緩衝區  
@@ -25,15 +25,27 @@ int  main( int  argc,  char  *argv[])
     while(1)
     {  
 	 gets(buf);
+	 i = 0;
+	 while(1)
+	 {
+	   if(buf[i] == '\0')
+	     {
+	        buf[i++] = '\n';
+	        buf[i++] = '\0';
+	        break;
+	      }
+	   i++;
+	 }
 	 printf( "sending: %s \n" ,buf);  
 	 sin_size= sizeof ( struct  sockaddr_in); 
- 
+
 	 /*向服務器發送數據包*/
 	 if ((len=sendto(client_sockfd,buf,strlen(buf),0,( struct  sockaddr *)&remote_addr, sizeof ( struct sockaddr)))<0)  
 	 {  
 	 perror( "recvfrom" );   
 	 return  1;  
 	 }
+	 
     }
     close(client_sockfd);  
     return  0;  

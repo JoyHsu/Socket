@@ -15,7 +15,7 @@ int  main( int  argc,  char  *argv[])
     memset(&my_addr,0, sizeof (my_addr));  //數據初始化--清零  
     my_addr.sin_family=AF_INET;  //設置為IP通信  
     my_addr.sin_addr.s_addr=INADDR_ANY; //服務器IP地址--允許連接到所有本地地址上  
-    my_addr.sin_port=htons(8000);  //服務器端口號  
+    my_addr.sin_port=htons(55056);  //服務器端口號  
       
     /*創建服務器端套接字--IPv4協議，面向無連接通信，UDP協議*/  
     if ((server_sockfd=socket(PF_INET,SOCK_DGRAM,0))<0)  
